@@ -1,0 +1,6 @@
+{
+"ODL" : "ODL_address",
+"ODL_PORT" : ODL_port,
+"ODL_USERNAME" : "ODL_username",
+"ODL_PASSWORD" : "ODL_password"
+}

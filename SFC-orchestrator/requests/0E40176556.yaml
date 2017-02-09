@@ -1,0 +1,133 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+description: example for a NSD.
+topology_template:
+    node_templates:
+    
+        VM2-1:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+                
+        network:
+                type: tosca.nodes.network.Network
+                properties:
+                    ip_version: 4
+                    cidr:   10.101.0.0/24
+                    start_ip: 10.101.0.100
+                    end_ip: 10.101.0.150
+        
+        VM1-3:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+                                    
+        VM-7:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+        
+
+        portT-1B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -1
+                - link:
+                    node: -2
+
+        portT-3B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -3
+                - link:
+                    node: -2
+
+        portL-5R-4:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -5
+                - link:
+                    node: -4
+
+        portT-7B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -7
+                - link:
+                    node: -2
+
+        portT-6B-1:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -6
+                - link:
+                    node: -1
+
+        portT-4B-7:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -4
+                - link:
+                    node: -7
+
+        portT-5B-7:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: -5
+                - link:
+                    node: -7
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    outputs:
+    
+            VM2_ip:
+                        value: { get_attribute: [VM2-1, private_address] }
+            
+            VM1_ip:
+                        value: { get_attribute: [VM1-3, private_address] }
+                    
+            VM_ip:
+                        value: { get_attribute: [VM-7, private_address] }
+    

@@ -1,0 +1,12 @@
+{
+"server" : "0.0.0.0",
+"port" : 8181,
+"monitoring_server" : "localhost",
+"monitoring_port" : 8080,
+"nctManager_server" : "localhost",
+"nctManager_port" : 8383,
+"sfcManager_server" : "localhost",
+"sfcManager_port" : 8282,
+"placement_server" : "localhost",
+"placement_port" : 8484
+}

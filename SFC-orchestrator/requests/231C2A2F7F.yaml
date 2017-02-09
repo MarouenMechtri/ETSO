@@ -1,0 +1,101 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+description: example for a NSD.
+topology_template:
+    node_templates:
+    
+        VM-1:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+                
+        NET-2:
+                type: tosca.nodes.network.Network
+                properties:
+                    ip_version: 4
+                    cidr:   10.101.0.0/24
+                    start_ip: 10.101.0.100
+                    end_ip: 10.101.0.150
+        
+        VM-3:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+            
+        VM-7:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: linux
+                        distribution: cirros
+                        version: 0.3.1
+        
+
+        portT-3B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-3
+                - link:
+                    node: NET-2
+
+        portT-7B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-7
+                - link:
+                    node: NET-2
+
+        portT-1B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-1
+                - link:
+                    node: NET-2
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    outputs:
+    
+            VM-1_ip:
+                        value: { get_attribute: [VM-1, private_address] }
+            
+            VM-3_ip:
+                        value: { get_attribute: [VM-3, private_address] }
+        
+            VM-7_ip:
+                        value: { get_attribute: [VM-7, private_address] }
+    

@@ -1,0 +1,6 @@
+{
+"port" : 8484,
+"server" : "0.0.0.0",
+"monitoring_server" : "localhost",
+"monitoring_port" : 8080
+}

@@ -1,0 +1,198 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+description: example for a NSD.
+
+topology_template:
+
+    inputs:
+        odl:
+              type: string
+              default: 192.168.111.28:8181
+
+    node_templates:
+
+        
+        NET-2:
+                type: tosca.nodes.network.Network
+                properties:
+                    ip_version: 4
+                    cidr:   10.101.0.0/24
+                    start_ip: 10.101.0.100
+                    end_ip: 10.101.0.150
+                                        
+        VM-9:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: sfc_client
+                        distribution: ubuntu
+                        version: 14.04
+            
+        VM-7:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: sfc_client
+                        distribution: ubuntu
+                        version: 14.04
+            
+        VM-10:
+            type: tosca.nodes.Compute
+            capabilities:
+                # Host container properties
+                host:
+                    properties:
+                       num_cpus: 2
+                       disk_size: 10GB
+                       mem_size: 512MB
+                # Guest Operating System properties
+                os:
+                    properties:
+                        architecture: x86_64
+                        type: sfc_client
+                        distribution: ubuntu
+                        version: 14.04
+        
+        portT-9B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-9
+                - link:
+                    node: NET-2
+
+        portT-7B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-7
+                - link:
+                    node: NET-2
+
+        portT-10B-2:
+            type: tosca.nodes.network.Port
+            requirements:
+                - binding:
+                    node: VM-10
+                - link:
+                    node: NET-2
+        VNF1:
+              type: tosca.nodes.nfv.VNF
+              properties:
+              attributes:
+                    type: dpi
+                    address:
+                    port: 40000
+                    nsh_aware: true
+              requirements:
+                    - host: VM-9
+        CP11:          #endpoints of VNF1 linked to VL1
+              type: tosca.nodes.nfv.CP
+              properties:
+              attributes:
+                    IP_address:
+                    interface: ens3
+                    port: 30000
+              requirements:
+                    - virtualBinding: VNF1
+                    - virtualLink: VL1
+        VNF2:
+              type: tosca.nodes.nfv.VNF
+              properties:
+              attributes:
+                    type: firewall
+                    address:
+                    port: 40000
+                    nsh_aware: true
+              requirements:
+                    - host: VM-7
+        CP21:          #endpoints of VNF2 linked to VL1
+              type: tosca.nodes.nfv.CP
+              properties:
+              attributes:
+                    IP_address:
+                    interface: ens3
+                    port: 30000
+              requirements:
+                    - virtualBinding: VNF2
+                    - virtualLink: VL1
+        VNF3:
+              type: tosca.nodes.nfv.VNF
+              properties:
+              attributes:
+                    type: napt44
+                    address:
+                    port: 40000
+                    nsh_aware: true
+              requirements:
+                    - host: VM-10
+        CP31:          #endpoints of VNF3 linked to VL2
+              type: tosca.nodes.nfv.CP
+              properties:
+              attributes:
+                    IP_address:
+                    port: 30000
+                    interface: ens3
+              requirements:
+                    - virtualBinding: VNF3
+                    - virtualLink: VL1
+        VL1:
+              type: tosca.nodes.nfv.VL
+              properties:
+                    vendor: HP
+              attributes:
+                    type: ip
+                    transport_type: vxlan-gpe
+        Forwarding_path1:
+              type: tosca.nodes.nfv.FP
+              description: the path (CP11->CP21->CP31)
+              properties:
+                    policy:
+              requirements:
+                    - forwarder: CP11
+                    - forwarder: CP21
+                    - forwarder: CP31
+  #################################################
+  # VNF Forwarding Graph nodes and the associated
+  # Network Forwarding Paths
+  #################################################
+    groups:
+        VNF_FG1:
+              type: tosca.groups.nfv.VNFFG
+              description: VNF forwarding graph
+              properties:
+                    vendor:
+                    version:
+                    connection_point: [ CP11, CP21, CP31 ]
+                    dependent_virtual_link: [ VL1 ]
+                    constituent_vnfs: [ VNF1, VNF2, VNF3 ]
+              members: [ Forwarding_path1 ]
+
+    outputs:
+                        
+            VM-9_ip:
+                        value: { get_attribute: [VM-9, private_address] }
+        
+            VM-7_ip:
+                        value: { get_attribute: [VM-7, private_address] }
+        
+            VM-10_ip:
+                        value: { get_attribute: [VM-10, private_address] }
+    
