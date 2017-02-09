@@ -1,0 +1,34 @@
+heat_template_version: 2013-05-23
+
+description: >
+  TOSCA template to test custom type with an interface defined on it,
+  and an interface overriding the type's one on the template itself
+
+parameters:
+  install_path:
+    type: string
+    default: /home/custom/other
+resources:
+  customwebserver_create_deploy:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config:
+        get_resource: customwebserver_create_config
+      input_values:
+        path:
+          get_param: install_path
+      server:
+        get_resource: server
+  server:
+    type: OS::Nova::Server
+    properties:
+      flavor: m1.small
+      image: ubuntu-12.04-software-config-os-init
+      user_data_format: SOFTWARE_CONFIG
+  customwebserver_create_config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      config:
+        get_file: install_override.sh
+      group: script
+outputs: {}

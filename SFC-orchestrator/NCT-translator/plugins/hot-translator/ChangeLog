@@ -1,0 +1,291 @@
+CHANGES
+=======
+
+* Updated from global requirements
+
+0.4.0
+-----
+
+* Fix broken policy translation
+* Doc update
+* Update tosca_network_port.py to support custom relationships
+* Added support for TOSCA policies in Heat translator
+* Generate a get_param from a get_input instead of inlining the default value
+* Update doc
+* Reenable disabled tests
+* Provide informative message for validation success
+* Map get_property to an actual property Disable some tests which import URL from GitHub, this commit needs to reach the repo for those tests to be valid again. A following patch will re-enable them
+* Log warning if Compute cap property not provided
+* Remove default key_name property and pass through all others
+* Treat OS version as an optional property
+* Interpret get_artifact in inputs handling
+* Updated from global requirements
+* Do not always require user parameters
+* Updated from global requirements
+* Fix OSC tests issues
+* Update code to use tosca-parser 0.4.0
+* Using pre-defined Flavors when Openstack not running
+* Support flavor and image properties for Compute translation
+* Add test suite for OpenStack Client
+* Accept defined unknown node types if they inherit a known TOSCA root type
+* Updated from global requirements
+* Use assertTrue/False instead of assertEqual(T/F)
+* Added log messages
+* Put py34 first in the env order of tox
+
+0.3.0
+-----
+
+* Provide an option to store translated output in a file
+* Update usage documentation
+* Replace assertEqual(None, *) with assertIsNone in tests
+* Add capability to only validate template in OSC plug-in
+* Provide option to only validate template
+* Add support to fetch flavor details from nova
+* Updated from global requirements
+* Create initial test coverage
+* Fix broken unittests due to tosca-parser 0.3.0 release
+* Updated from global requirements
+* Updated from global requirements
+* Correc the usage example
+* Update README
+* Added checking for invalid or malformed command line parameters
+* Refactor dynamic types mapping feature to use importlib
+
+0.2.0
+-----
+
+* Fix a bug in OSC related to URL handling
+* Do not use logging conf on shell
+* Update documentation to cover new features
+* Handle URLs and import parameters in OSC
+* Fix custom import issues when using shell environments
+* Create command line entry point
+* Update temporary URLs to github URLs
+* Add translation of CSAR archives
+* Handle URLs for input templates and imports
+* Update README
+* Fix translation issue with interface inputs and functions
+* Update trove classifier
+* Allow for dynamic class loading of target types
+* Change ignore-errors to ignore_errors
+* Updated from global requirements
+* Update doc references
+* Move tosca library test data under translator tests
+* Updated from global requirements
+* Enable Translator with new TOSCA library (6)
+* Supporting logging in heat-translator with config file
+* Remove CSAR files from translator
+* Enable Translator with new TOSCA library (5)
+* Enable Translator with new TOSCA library (4)
+* Enable Translator with new TOSCA library (3)
+* Enable Translator with new TOSCA library (2)
+* Enable Translator with new TOSCA library (1)
+* Add TOSCA parser as new requirement
+
+0.1.0
+-----
+
+* MemoryUnit Incorrectly normalizes to uppercase
+* Implement SoftwareComponent and WebApplication normative types
+* Validation of TOSCA version
+* scalar-unit data type support as template input parameters
+* Corrected checking required properties of OS capabilities in UT
+* Validation for TOSCA second to below levels in template
+* Fix two typos on heat-translator documentation
+* Modified to get closest flavor based on minimal/no inputs
+* Set property to be required by default
+* Update TOSCA artifacts type
+* Separate implementation of custom types and base types
+* supporting short versions of requirements
+* Add full support for PortDef data type
+* Update network examples to the spec (1)
+* Update TOSCA wordpress custom definition
+* Update the 4th and 5th block storage examples (1)
+* Add missing storage examples from the spec
+* Update the 6th block storage example from the spec (1)
+* Remove the circular dependency in network examples
+* Update the first block storage example to the spec (1)
+* Update object store definition and example
+* Sync single server example with latest spec
+* Sync network examples with the spec
+* Remove py26 env
+* Fix translation of block storage
+* Updated from global requirements
+* Add a unit test for nodejs-mongodb template translation
+* Update TOSCA version per spec
+* Prepare ELK TOSCA Template for Translation into HOT (6)
+* Add app in the nodejs mongodb template
+* Update TOSCA credential datatype
+* Update TOSCA relationship inheritance
+* Update TOSCA translator installation doc
+* Update TOSCA relationship valid targets
+* Document usage of translator with OSC
+* Added directory structure in README.rst
+* Add a unit test for ELK translation
+* Annotate TOSCA scripts
+* Prepare ELK TOSCA Template for Translation into HOT (5)
+* Updated from global requirements
+* Implement tosca.scalar-unit
+* Update TOSCA base type definition file with version
+* Prepare ELK TOSCA Template for Translation into HOT (4)
+* Added translation to the tosca network module
+* Added translation in dataentity module
+* Fix typos in ELK CSAR readme file
+* Updated from global requirements
+* Adding unit test coverage for the validate method
+* Implement artifact type definition
+* Add support for parameters to translate template
+* Added the missing testcases for Tosca translator
+* Add handler for ConnectsTo relationship
+* Prepare ELK TOSCA Template for Translation into HOT (3)
+* Update TOSCA ELK scripts
+* Adding an empty template test for simple_parse()
+* Add unit testcases for toscalib_elements_constraints.py
+* Fixed spelling mistake
+* Fixing an error message which was not translated
+* Add the ability to set output file
+* Create an OSC plugin for heat-translator
+* Resolve interfaces by symbolic name not by type
+* TOSCA: Database and DBMS node properties update
+* TOSCA: fix indentation in elk CSAR
+* TOSCA: create csar for monitoring use case
+* Installer scripts should not run simultaneously on the same server
+* Prepare ELK TOSCA Template for Translation into HOT (2)
+* TOSCA: Update memory size per spec changes
+* Adding test coverage for HotParameter
+* Fix host server assignment for resources with multi-node dependency
+* Heat-Translator: Update README with new IRC Channel
+* Added a unit test to cover diff_dicts in utils.py
+* Fix installation package name
+* Prepare ELK TOSCA Template for Translation into HOT
+* TOSCA: interfaces for relationship templates
+* TOSCA: fix Python34 UnicodeDecodeError
+* Pick up new plugins for ELK
+* Heat translator plugins for new TOSCA custom types
+* TOSCA: keep the license formatting consistent
+* TOSCA: Create a test CLI program
+* Fix typos in tosca_elk.yaml file
+* TOSCA: use the artifacts directory for scripts
+* TOSCA: Correct duplicate Block Storage description
+* Implement tosca.capabilities.Container
+* TOSCA: minor updates in TOSCA def file per spec
+* TOSCA: rename sample template file
+* Create a unit test for wordpress specification in TOSCA
+* Update the TOSCA monitoring use case
+* Update TOSCA requirements for template and type
+* Apply topology_template to tosca_template
+* Inital Implementation of topology template
+* Add test templates for topology template
+* Update code base to be hacking compatible
+* Update requirements and test-requirements
+* Update README.rst to point to correct urls
+* Update heat-translator's documentation theme
+* Added unit test to verify num vals in str_to_num
+* Implementation of tosca.node.ObjectStorage
+* Implementation of CompareUtils class
+* Added a unit test for convert_unit_size_to_num
+* Added unit test to cover ValueError in str_to_num
+* Update definition of tosca.nodes.WebServer
+* TOSCA: organize test templates
+* Fixes few nits in the network features code
+* Create dictionary returning methods for certain class properties
+* The output template is close to HOT template
+* Rename TOSCA AttachTo relationship
+* Fix coverage so that it works for this repo
+* TOSCA: Handle memory units
+* TOSCA: Create new utils module with memory units
+* Add TOSCA networking features
+* TOSCA: Update README source code link
+* Follow the hosting chain to find the host server
+* Add scripts for logstash, elasticsearch, kibana
+* Add scripts to set up monitoring
+* Update set of scripts for mongodb and nodejs
+* tosca data type validation for float and timestamp
+* TOSCA: Handle custom capability type definition
+* Return input default value on get_input evaluation
+* Replace ip_address attribute with public_address and private_address
+* checking input parameter not None before accessing
+* TOSCA: Add missing artifacts references
+* Change name-value pairs to name-object pairs in the dictoinary
+* validating reference properties in translate_input.py
+* Add support for properties_def as a dictionary
+* added _validate_capabilities_properties function & UT
+* Adding tosca.capabilities.Scalable in TOSCA_definitions.yaml
+* Apply TOSCA OS capability to compute node
+* TOSCA: consider nodejs as web server only
+* TOSCA: remove misleading key Entry-Definitions
+* Use TOSCA properties from capabilities definition
+* Remove Stackforge from README
+* New custom type, unit test and template for use case
+* Add TOSCA networking definiton
+* Update TOSCA interfaces naming
+* Separate TOSCA capabilities definition from assignment
+* Remove unused TOSCA type variables
+* TOSCA: Do not import individual exception classes
+* Add missing TOSCA type keywords
+* Update TOSCA compute requirement
+* Validate TOSCA template version
+* Update TOSCA version
+* Add scalar unit type
+* Handle TOSCA relationship with 'type' keyword
+* Handle custom datatypes in current template
+* Change definition for tosca.capabilities.Endpoint
+* Remove Tosca.capabilities.feature per specs changes
+* add blockstorage attachment notation
+* Remove redundant TOSCA nodejs requirement
+* Change TOSCA interfaces keyword 'input' to 'inputs'
+* Add TOSCA service template for monitoring
+* Minor tweaks
+* Main translation code to handle parameters
+* Add new support for get_attribute
+* Add support for datatypes
+* Rename TOSCA node property relationship to relationships
+* Add a debug env for tox
+* Sort TOSCA relation output for a match to expected test result
+* Create relationship between TOSCA nodes per updated specs
+* Fix .gitreview after rename/transfer
+* Fix errors in templates and base types
+* Workflow documentation is now in infra-manual
+* get_attribute HOST keyword
+* Handle get_attribute in Tosca outputs
+* Add support for list and map types
+* Check for tosca keyword in the TOSCA type
+* Create a TOSCA CSAR for Wordpress template
+* Represent memory unit in string
+* Remove extraneous vim editor configuration comments
+* Provide implementation to parse monitoring template in TOSCA library
+* Allow Tosca templates with no inputs/outputs
+* Extended intrinsic functions support
+* Remove README.md as duplicate for .rst one
+* Work toward Python 3.4 support and testing
+* Add missing TOSCA template keynames
+* Update README and other doc files
+* Clean up heat-translator documentation
+* Revert use of olsosphinx library
+* add docs job to tox.ini
+* Check tosca node requirements
+* Add Schema parent class for Property, Input, Output
+* Implement TOSCA Block Storage
+* Allow use of TOSCA types by short name in the TOSCA template
+* Add type attributes
+* Enhance the validation of tosca
+* Enhanced tosca validation
+* Added a module for intrinsic function
+* Support importing TOSCA custom node types
+* Update the Babel module version
+* TOSCA generator top level code
+* TOSCA generator translation for individual TOSCA type
+* TOSCA generator template syntax
+* Remove tosca node template inheritance from node type
+* Add missing parameter for the tosca property
+* TOSCA parser
+* TOSCA definition types for TOSCA library
+* Add .gitreview file and apply cookiecutter template
+* Delete testattrs.pyc
+* Delete test4.pyc
+* Delete test3.pyc
+* Delete test2.pyc
+* Delete squaretest.pyc
+* First code drop on data modeling
+* Initial commit
