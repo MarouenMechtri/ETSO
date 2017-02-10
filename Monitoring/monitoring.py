@@ -26,7 +26,6 @@ from bottle import route, run, static_file, request, response, Bottle,redirect,t
 
 import compute_node
 import infrastructure
-import credentials
 
 config_file = open('config.json')
 config_data = json.load(config_file)
@@ -137,8 +136,3 @@ if __name__ == '__main__':
                       help="port number", metavar="port")
     (options, args) = parser.parse_args()
     run(host=server, port=port, debug=True)
-    
-
-
-
-
