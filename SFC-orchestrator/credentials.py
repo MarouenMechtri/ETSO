@@ -1,6 +1,7 @@
 USERNAME = ""
 PASSWORD = ""
-TENANT = ""
+TENANT_NAME = ""
+TENANT_ID = ""
 ENDPOINT = ""
 SERVICE = ""
 REGION = ""
