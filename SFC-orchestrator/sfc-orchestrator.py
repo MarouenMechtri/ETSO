@@ -31,7 +31,7 @@ from bottle import route, run, static_file, request, response
 
 from novaclient import client
 import novaclient
-from packaging import version
+from packaging import version as pack_version
 
 from toscaparser.tosca_template import ToscaTemplate
 from toscaparser.sfc.tosca_translator import TOSCATranslator
@@ -133,7 +133,7 @@ def MappingZoneHost():
     service = credentials.SERVICE
     region = credentials.REGION
     version = credentials.VERSION
-    if version.parse(novaclient.__version__) < version.parse("7.0.0"):
+    if pack_version.parse(novaclient.__version__) < pack_version.parse("7.0.0"):
         nova_client = client.Client(version, username, password,
                                 tenant_name, endpoint,
                                 service_type=service,

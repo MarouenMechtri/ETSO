@@ -23,7 +23,7 @@ Created on Sep 15, 2016
 from novaclient import client
 import ceilometerclient.client
 import novaclient
-from packaging import version
+from packaging import version as pack_version
 class Infrastructure:
 
 
@@ -40,7 +40,7 @@ class Infrastructure:
 
     ###### Authenticate in Nova
     def nova_authentification(self):
-        if version.parse(novaclient.__version__) < version.parse("7.0.0"):
+        if pack_version.parse(novaclient.__version__) < pack_version.parse("7.0.0"):
             nova_client = client.Client(self.version, self.username, self.password,
                                     self.tenant_name, self.endpoint,
                                 service_type=self.service,
