@@ -47,13 +47,14 @@ def create_stack():
         username = bottle.request.get_header('username')
         password = bottle.request.get_header('password')
         endpoint = bottle.request.get_header('endpoint')
-        tenant = bottle.request.get_header('tenant')
+        tenant_name = bottle.request.get_header('tenant_name')
+        tenant_id = bottle.request.get_header('tenant_id')
         service = bottle.request.get_header('service')
         region = bottle.request.get_header('region')
         heat_url = bottle.request.get_header('heat_url')
         stack_name = bottle.request.get_header('stack_name')
 
-        stack = stack_create_heat(username, password, endpoint, tenant, heat_url, request._get_body_string(), stack_name)
+        stack = stack_create_heat(username, password, endpoint, tenant_name, heat_url, request._get_body_string(), stack_name)
         return stack['stack']['id']
     if plugin == "cloudify":
        stack_create_cloudify(request._get_body_string())
@@ -68,13 +69,14 @@ def delete_stack():
         username = bottle.request.get_header('username')
         password = bottle.request.get_header('password')
         endpoint = bottle.request.get_header('endpoint')
-        tenant = bottle.request.get_header('tenant')
+        tenant_name = bottle.request.get_header('tenant_name')
+        tenant_id = bottle.request.get_header('tenant_id')
         service = bottle.request.get_header('service')
         region = bottle.request.get_header('region')
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        stack_delete_heat(username, password, endpoint, tenant, heat_url, stack_uuid)
+        stack_delete_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid)
     if plugin == "cloudify":
         stack_uuid = bottle.request.get_header('uuid')
         stack_delete_cloudify(stack_uuid)
@@ -90,13 +92,14 @@ def status_stack():
         username = bottle.request.get_header('username')
         password = bottle.request.get_header('password')
         endpoint = bottle.request.get_header('endpoint')
-        tenant = bottle.request.get_header('tenant')
+        tenant_name = bottle.request.get_header('tenant_name')
+        tenant_id = bottle.request.get_header('tenant_id')
         service = bottle.request.get_header('service')
         region = bottle.request.get_header('region')
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        return stack_status_heat(username, password, endpoint, tenant, heat_url, stack_uuid)
+        return stack_status_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid)
     if plugin == "cloudify":
         stack_uuid = bottle.request.get_header('uuid')
         return stack_status_cloudify(stack_uuid)
@@ -110,13 +113,14 @@ def output_stack():
         username = bottle.request.get_header('username')
         password = bottle.request.get_header('password')
         endpoint = bottle.request.get_header('endpoint')
-        tenant = bottle.request.get_header('tenant')
+        tenant_name = bottle.request.get_header('tenant_name')
+        tenant_id = bottle.request.get_header('tenant_id')
         service = bottle.request.get_header('service')
         region = bottle.request.get_header('region')
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        stack_data = stack_output_heat(username, password, endpoint, tenant, heat_url, stack_uuid, request._get_body_string())
+        stack_data = stack_output_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, request._get_body_string())
         return stack_data
     if plugin == "cloudify":
        stack_output_cloudify(request._get_body_string())

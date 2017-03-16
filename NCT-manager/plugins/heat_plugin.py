@@ -37,9 +37,9 @@ keystone = None
 heat = None
 
 #keystone authentication
-def auth_heat(username, password, endpoint, tenant):
+def auth_heat(username, password, endpoint, tenant_name):
         try:
-            keystone_client = ksclient.Client(username=username, password=password, auth_url=endpoint, project_name=tenant)
+            keystone_client = ksclient.Client(username=username, password=password, auth_url=endpoint, project_name=tenant_name)
         except ValueError:
             print "Error authenticating to the keystone"
         global keystone
@@ -71,8 +71,8 @@ def my_random_string_heat(string_length=10):
 
 
 #create Stack
-def stack_create_heat(username, password, endpoint, tenant, heat_url, nct_template, stack_name):
-    auth_heat(username, password, endpoint, tenant)
+def stack_create_heat(username, password, endpoint, tenant_name, heat_url, nct_template, stack_name):
+    auth_heat(username, password, endpoint, tenant_name)
     get_heat(heat_url)
     #my_random_string_heat()
     #print nct_template
@@ -98,8 +98,8 @@ def stack_create_heat(username, password, endpoint, tenant, heat_url, nct_templa
 
 
 # Delete Stack
-def stack_delete_heat(username, password, endpoint, tenant, heat_url, stack_uuid):
-    auth_heat(username, password, endpoint, tenant)
+def stack_delete_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid):
+    auth_heat(username, password, endpoint, tenant_name)
     get_heat(heat_url)
     while heat.stacks.get(stack_uuid).to_dict()['stack_status']!='DELETE_COMPLETE':
         if heat.stacks.get(stack_uuid).to_dict()['stack_status']=='DELETE_IN_PROGRESS':
@@ -115,16 +115,16 @@ def stack_delete_heat(username, password, endpoint, tenant, heat_url, stack_uuid
 
 
 # Status Stack
-def stack_status_heat(username, password, endpoint, tenant, heat_url, stack_uuid):
-    auth_heat(username, password, endpoint, tenant)
+def stack_status_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid):
+    auth_heat(username, password, endpoint, tenant_name)
     get_heat(heat_url)
     return heat.stacks.get(stack_uuid).to_dict()['stack_status']
 
 
 
 # Output Stack
-def stack_output_heat(username, password, endpoint, tenant, heat_url, stack_uuid, output_template):
-    auth_heat(username, password, endpoint, tenant)
+def stack_output_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, output_template):
+    auth_heat(username, password, endpoint, tenant_name)
     get_heat(heat_url)
 
     stack_dict = heat.stacks.get(stack_uuid).to_dict()

@@ -63,7 +63,8 @@ def placement():
     username = bottle.request.get_header('username')
     password = bottle.request.get_header('password')
     endpoint = bottle.request.get_header('endpoint')
-    tenant = bottle.request.get_header('tenant')
+    tenant_name = bottle.request.get_header('tenant_name')
+    tenant_id = bottle.request.get_header('tenant_id')
     service = bottle.request.get_header('service')
     region = bottle.request.get_header('region')
 
@@ -104,7 +105,8 @@ def placement():
     headers['username'] = username
     headers['password'] = password
     headers['endpoint'] = endpoint
-    headers['tenant'] = tenant
+    headers['tenant_name'] = tenant_name
+    headers['tenant_id'] = tenant_id
     headers['service'] = service
     headers['region'] = region
 
