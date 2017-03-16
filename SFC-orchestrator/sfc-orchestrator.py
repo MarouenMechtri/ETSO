@@ -30,6 +30,9 @@ import bottle
 from bottle import route, run, static_file, request, response
 
 from novaclient import client
+import novaclient
+from packaging import version
+
 from toscaparser.tosca_template import ToscaTemplate
 from toscaparser.sfc.tosca_translator import TOSCATranslator
 from toscaparser.utils.gettextutils import _
@@ -124,15 +127,22 @@ def my_random_string(string_length=10):
 def MappingZoneHost():
     username = credentials.USERNAME
     password = credentials.PASSWORD
-    tenant = credentials.TENANT
+    tenant_name = credentials.TENANT_NAME
+    tenant_id = credentials.TENANT_ID
     endpoint = credentials.ENDPOINT
     service = credentials.SERVICE
     region = credentials.REGION
     version = credentials.VERSION
-    nova_client = client.Client(version, username, password,
-                                tenant, endpoint,
+    if version.parse(novaclient.__version__) < version.parse("7.0.0"):
+        nova_client = client.Client(version, username, password,
+                                tenant_name, endpoint,
                                 service_type=service,
                                 region_name=region)
+    else:
+        nova_client = client.Client(version, username, password,
+                                    tenant_id, endpoint,
+                                    service_type=service,
+                                    region_name=region)
     host_to_zone = {}
     for zone in nova_client.availability_zones.list():
 
@@ -169,7 +179,8 @@ def delete_template():
     headers['username'] = credentials.USERNAME
     headers['password'] = credentials.PASSWORD
     headers['endpoint'] = credentials.ENDPOINT
-    headers['tenant'] = credentials.TENANT
+    headers['tenant_name'] = credentials.TENANT_NAME
+    headers['tenant_id'] = credentials.TENANT_ID
     headers['service'] = credentials.SERVICE
     headers['region'] = credentials.REGION
     headers['heat_url'] = credentials.HEAT_URL
@@ -203,7 +214,8 @@ def orchetration(path, parsed_params, a_file, stack_name):
     placement_headers['username'] = credentials.USERNAME
     placement_headers['password'] = credentials.PASSWORD
     placement_headers['endpoint'] = credentials.ENDPOINT
-    placement_headers['tenant'] = credentials.TENANT
+    placement_headers['tenant_name'] = credentials.TENANT_NAME
+    placement_headers['tenant_id'] = credentials.TENANT_ID
     placement_headers['service'] = credentials.SERVICE
     placement_headers['region'] = credentials.REGION
 
@@ -229,7 +241,8 @@ def orchetration(path, parsed_params, a_file, stack_name):
     headers['username'] = credentials.USERNAME
     headers['password'] = credentials.PASSWORD
     headers['endpoint'] = credentials.ENDPOINT
-    headers['tenant'] = credentials.TENANT
+    headers['tenant_name'] = credentials.TENANT_NAME
+    headers['tenant_id'] = credentials.TENANT_ID
     headers['service'] = credentials.SERVICE
     headers['region'] = credentials.REGION
     headers['heat_url'] = credentials.HEAT_URL

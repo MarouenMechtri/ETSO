@@ -22,14 +22,17 @@ Created on Sep 15, 2016
 
 from novaclient import client
 import ceilometerclient.client
+import novaclient
+from packaging import version
 class Infrastructure:
 
 
-    def __init__(self, version, username, password, tenant, endpoint, service, region):
+    def __init__(self, version, username, password, tenant_name, tenant_id, endpoint, service, region):
         self.version = version
         self.username = username
         self.password = password
-        self.tenant = tenant
+        self.tenant_name = tenant_name
+        self.tenant_id = tenant_id
         self.endpoint = endpoint
         self.service = service
         self.region = region
@@ -37,17 +40,23 @@ class Infrastructure:
 
     ###### Authenticate in Nova
     def nova_authentification(self):
-        nova_client = client.Client(self.version, self.username, self.password,
-                                    self.tenant, self.endpoint,
+        if version.parse(novaclient.__version__) < version.parse("7.0.0"):
+            nova_client = client.Client(self.version, self.username, self.password,
+                                    self.tenant_name, self.endpoint,
                                 service_type=self.service,
                                 region_name=self.region)
+        else:
+            nova_client = client.Client(self.version, self.username, self.password,
+                                        self.tenant_id, self.endpoint,
+                                        service_type=self.service,
+                                        region_name=self.region)
         return nova_client
 
     ##### Authenticate in Ceilometer
     def ceilometer_authentification(self):
         ceilometer_client = ceilometerclient.client.get_client(2, os_username=self.username,
                                                  os_password=self.password,
-                                                 os_tenant_name=self.tenant,
+                                                 os_tenant_name=self.tenant_name,
                                                  os_auth_url=self.endpoint)
         return ceilometer_client
 
