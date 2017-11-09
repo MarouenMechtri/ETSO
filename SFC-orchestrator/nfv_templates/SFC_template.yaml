@@ -11,7 +11,7 @@ topology_template:
     node_templates:
 
         
-        NET-1:
+        NET-2:
             type: tosca.nodes.network.Network
             properties:
                 ip_version: 4
