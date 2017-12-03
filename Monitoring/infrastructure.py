@@ -27,7 +27,7 @@ from packaging import version as pack_version
 class Infrastructure:
 
 
-    def __init__(self, version, username, password, tenant_name, tenant_id, endpoint, service, region):
+    def __init__(self, version, username, password, tenant_name, tenant_id, endpoint, service, region, os_cacert):
         self.version = version
         self.username = username
         self.password = password
@@ -36,6 +36,7 @@ class Infrastructure:
         self.endpoint = endpoint
         self.service = service
         self.region = region
+        self.os_cacert = os_cacert
 
 
     ###### Authenticate in Nova
@@ -44,12 +45,14 @@ class Infrastructure:
             nova_client = client.Client(self.version, self.username, self.password,
                                     self.tenant_name, self.endpoint,
                                 service_type=self.service,
-                                region_name=self.region)
+                                region_name=self.region,
+                                os_cacert=self.os_cacert)
         else:
             nova_client = client.Client(self.version, self.username, self.password,
                                         self.tenant_id, self.endpoint,
                                         service_type=self.service,
-                                        region_name=self.region)
+                                        region_name=self.region,
+                                        os_cacert=self.os_cacert)
         return nova_client
 
     ##### Authenticate in Ceilometer
@@ -57,7 +60,8 @@ class Infrastructure:
         ceilometer_client = ceilometerclient.client.get_client(2, os_username=self.username,
                                                  os_password=self.password,
                                                  os_tenant_name=self.tenant_name,
-                                                 os_auth_url=self.endpoint)
+                                                 os_auth_url=self.endpoint,
+                                                 os_cacert=self.os_cacert)
         return ceilometer_client
 
 

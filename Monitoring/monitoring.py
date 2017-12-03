@@ -52,7 +52,7 @@ def infra_data():
     tenant_id = bottle.request.get_header('tenant_id')
     service = bottle.request.get_header('service')
     region = bottle.request.get_header('region')
-
+    os_cacert = bottle.request.get_header('os_cacert')
 
     #version = credentials.VERSION
     #username = credentials.USERNAME
@@ -63,7 +63,7 @@ def infra_data():
     #region = credentials.REGION
 
 
-    infra=infrastructure.Infrastructure(version, username, password, tenant_name, tenant_id, endpoint, service, region)
+    infra=infrastructure.Infrastructure(version, username, password, tenant_name, tenant_id, endpoint, service, region, os_cacert)
     compute=compute_node.Compute_node(infra)
     ip_list={}
     for compute_name in infra.get_compute_nodes_name_list():
@@ -97,6 +97,7 @@ def reserved_metrics():
     tenant_id = bottle.request.get_header('tenant_id')
     service = bottle.request.get_header('service')
     region = bottle.request.get_header('region')
+    os_cacert = bottle.request.get_header('os_cacert')
 
     #version = credentials.VERSION
     #username = credentials.USERNAME
@@ -106,7 +107,7 @@ def reserved_metrics():
     #service = credentials.SERVICE
     #region = credentials.REGION
 
-    infra=infrastructure.Infrastructure(version, username, password, tenant_name, tenant_id, endpoint, service, region)
+    infra=infrastructure.Infrastructure(version, username, password, tenant_name, tenant_id, endpoint, service, region, os_cacert)
     compute=compute_node.Compute_node(infra)
     for compute_name in infra.get_compute_nodes_name_list():
         total_CPU=compute.get_total_CPU(compute_name)
