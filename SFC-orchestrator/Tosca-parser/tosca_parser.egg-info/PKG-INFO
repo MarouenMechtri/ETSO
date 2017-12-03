@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: tosca-parser
-Version: 0.3.1.dev49
+Version: 0.0.1.dev13
 Summary: Parser for TOSCA Simple Profile in YAML.
 Home-page: http://www.openstack.org/
 Author: OpenStack

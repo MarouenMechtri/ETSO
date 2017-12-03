@@ -97,7 +97,7 @@ class ToscaCompute(HotResource):
         self.properties['user_data_format'] = 'SOFTWARE_CONFIG'
         # TODO(anyone): handle user key
         # hardcoded here for testing
-        self.properties['key_name'] = 'marouen'
+        self.properties['key_name'] = 'mechteri'
 
     # To be reorganized later based on new development in Glance and Graffiti
     def translate_compute_flavor_and_image(self,
