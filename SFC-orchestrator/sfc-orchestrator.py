@@ -133,16 +133,19 @@ def MappingZoneHost():
     service = credentials.SERVICE
     region = credentials.REGION
     version = credentials.VERSION
+    os_cacert = credentials.OS_CACERT
     if pack_version.parse(novaclient.__version__) < pack_version.parse("7.0.0"):
         nova_client = client.Client(version, username, password,
                                 tenant_name, endpoint,
                                 service_type=service,
-                                region_name=region)
+                                region_name=region,
+                                os_cacert=os_cacert)
     else:
         nova_client = client.Client(version, username, password,
                                     tenant_id, endpoint,
                                     service_type=service,
-                                    region_name=region)
+                                    region_name=region,
+                                    os_cacert=os_cacert)
     host_to_zone = {}
     for zone in nova_client.availability_zones.list():
 
@@ -184,6 +187,8 @@ def delete_template():
     headers['service'] = credentials.SERVICE
     headers['region'] = credentials.REGION
     headers['heat_url'] = credentials.HEAT_URL
+    headers['os_cacert'] = credentials.OS_CACERT
+
     headers['uuid'] = uuid
     s = requests.Session()
     r = s.delete(NCT_Manager_stack_delete_URL, headers=headers, stream=False)
@@ -201,6 +206,7 @@ def orchetration(path, parsed_params, a_file, stack_name):
     translator = TOSCATranslator(tosca, parsed_params)
     translator.translate()
 
+    # When the last variable is equal to True that's mean that we enable the saving of the NCT template in the request directory
     decomposed_request = request_decomposition(tosca, translator, stack_name, False)
 
     '''Calling Placement Module'''
@@ -218,8 +224,11 @@ def orchetration(path, parsed_params, a_file, stack_name):
     placement_headers['tenant_id'] = credentials.TENANT_ID
     placement_headers['service'] = credentials.SERVICE
     placement_headers['region'] = credentials.REGION
+    placement_headers['os_cacert'] = credentials.OS_CACERT
+
 
     r = s.post(PLACEMENT_URL, data=decomposed_request['request'], headers=placement_headers, stream=False)
+
 
     '''Calling Request Manager to update NCT template'''
 
@@ -229,7 +238,7 @@ def orchetration(path, parsed_params, a_file, stack_name):
         for key, value in json.loads(r.text).iteritems():
             location[key] = str(zone_to_host[value])
         decomposed_request['nct'] = add_vm_location(translator, location)
-        decomposed_request['nct'] = add_odl_address(translator, location)
+        #decomposed_request['nct'] = add_odl_address(translator, location)
 
     '''Calling NCT Manager to instantiate NCT template'''
 
@@ -246,6 +255,7 @@ def orchetration(path, parsed_params, a_file, stack_name):
     headers['service'] = credentials.SERVICE
     headers['region'] = credentials.REGION
     headers['heat_url'] = credentials.HEAT_URL
+    headers['os_cacert'] = credentials.OS_CACERT
     headers['stack_name'] = 'nct_' + stack_name
     r = s.post(NCT_Manager_stack_create_URL, data=decomposed_request['nct'], headers=headers, stream=False)
     if r.status_code == 200:
@@ -263,6 +273,7 @@ def orchetration(path, parsed_params, a_file, stack_name):
     '''Calling Request Manager to update sf and sff templates'''
 
     if r.status_code == 200:
+      if 'sf' in decomposed_request:
         sf_sff_template = update_sf_sff_templates(decomposed_request['sf'], decomposed_request['sff'], r.text)
         decomposed_request['sf'] = sf_sff_template['sf']
         decomposed_request['sff'] = sf_sff_template['sff']

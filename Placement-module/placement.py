@@ -67,20 +67,29 @@ def placement():
     tenant_id = bottle.request.get_header('tenant_id')
     service = bottle.request.get_header('service')
     region = bottle.request.get_header('region')
+    os_cacert = bottle.request.get_header('os_cacert')
 
     listVMs_json = json.loads(request._get_body_string())
     nbVMs = 0
     listVMs = {}
 
     for resource in listVMs_json:
-        listVMs[listVMs_json[resource]['order']] = {}
-        listVMs[listVMs_json[resource]['order']]['cpu'] = listVMs_json[resource]['num_cpus']
-        listVMs[listVMs_json[resource]['order']]['mem'] = listVMs_json[resource]['mem_size']
-        listVMs[listVMs_json[resource]['order']]['sto'] = listVMs_json[resource]['disk_size']
-        listVMs[listVMs_json[resource]['order']]['name'] = resource
+
+        if 'order' in listVMs_json[resource]:
+          listVMs[listVMs_json[resource]['order']] = {}
+          listVMs[listVMs_json[resource]['order']]['cpu'] = listVMs_json[resource]['num_cpus']
+          listVMs[listVMs_json[resource]['order']]['mem'] = listVMs_json[resource]['mem_size']
+          listVMs[listVMs_json[resource]['order']]['sto'] = listVMs_json[resource]['disk_size']
+          listVMs[listVMs_json[resource]['order']]['name'] = resource
+        ## there is no SFC in the request
+        else:
+          listVMs[nbVMs] = {}
+          listVMs[nbVMs]['cpu'] = listVMs_json[resource]['num_cpus']
+          listVMs[nbVMs]['mem'] = listVMs_json[resource]['mem_size']
+          listVMs[nbVMs]['sto'] = listVMs_json[resource]['disk_size']
+          listVMs[nbVMs]['name'] = resource
+
         nbVMs = nbVMs + 1
-
-
 
 
     instanceIG_file = open("instanceIG" + str(nbVMs) + "-0", "w")
@@ -109,6 +118,8 @@ def placement():
     headers['tenant_id'] = tenant_id
     headers['service'] = service
     headers['region'] = region
+    headers['os_cacert'] = os_cacert
+
 
     r = s.get(MONI_URL, headers=headers, stream=False)
     if r.status_code == 200:

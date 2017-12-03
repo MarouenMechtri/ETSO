@@ -53,8 +53,9 @@ def create_stack():
         region = bottle.request.get_header('region')
         heat_url = bottle.request.get_header('heat_url')
         stack_name = bottle.request.get_header('stack_name')
+        os_cacert = bottle.request.get_header('os_cacert')
 
-        stack = stack_create_heat(username, password, endpoint, tenant_name, heat_url, request._get_body_string(), stack_name)
+        stack = stack_create_heat(username, password, endpoint, tenant_name, heat_url, request._get_body_string(), stack_name, os_cacert)
         return stack['stack']['id']
     if plugin == "cloudify":
        stack_create_cloudify(request._get_body_string())
@@ -76,7 +77,9 @@ def delete_stack():
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        stack_delete_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid)
+        os_cacert = bottle.request.get_header('os_cacert')
+
+        stack_delete_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, os_cacert)
     if plugin == "cloudify":
         stack_uuid = bottle.request.get_header('uuid')
         stack_delete_cloudify(stack_uuid)
@@ -99,7 +102,9 @@ def status_stack():
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        return stack_status_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid)
+        os_cacert = bottle.request.get_header('os_cacert')
+
+        return stack_status_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, os_cacert)
     if plugin == "cloudify":
         stack_uuid = bottle.request.get_header('uuid')
         return stack_status_cloudify(stack_uuid)
@@ -120,7 +125,9 @@ def output_stack():
         heat_url = bottle.request.get_header('heat_url')
 
         stack_uuid = bottle.request.get_header('uuid')
-        stack_data = stack_output_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, request._get_body_string())
+        os_cacert = bottle.request.get_header('os_cacert')
+
+        stack_data = stack_output_heat(username, password, endpoint, tenant_name, heat_url, stack_uuid, request._get_body_string(), os_cacert)
         return stack_data
     if plugin == "cloudify":
        stack_output_cloudify(request._get_body_string())
