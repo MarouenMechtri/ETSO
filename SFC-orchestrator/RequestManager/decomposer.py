@@ -288,8 +288,12 @@ def request_decomposition(tosca, translator, stack_name, save_file):
         template_decomposition['sfp'] = json.dumps(service_function_paths)
         template_decomposition['rsp'] = json.dumps(rendered_service_path)
         template_decomposition['request'] = json.dumps(request_resources)#.output_to_yaml()
-
-
+    ## in case there is no sfc request
+    else:
+        for node in tosca.nodetemplates:
+            if node.type == 'tosca.nodes.Compute':
+                request_resources[node.name] = node.entity_tpl['capabilities']['host']['properties']
+        template_decomposition['request'] = json.dumps(request_resources)
 
     if save_file:
         request_file = open("request_" + stack_name + ".yml", "w")
