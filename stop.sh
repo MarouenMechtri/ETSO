@@ -1,0 +1,47 @@
+#  Copyright 2016-2017 Marouane Mechteri
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+"""
+Created on Dec 3, 2017
+@authors: Marouane Mechteri
+@contacts: {mechteri.marouane}@gmail.com
+@license: Apache License, Version 2.0
+"""
+
+#!/bin/sh
+
+echo "STOP Monitoring module"
+kill -9 `ps aux | grep monitoring.py | grep -v grep | awk '{print $2}'`
+sleep 1
+echo "STOP Monitoring module -------------------------------> OK"
+
+echo "STOP NCT-Manager module"
+kill -9 `ps aux | grep nct-manager.py | grep -v grep | awk '{print $2}'`
+sleep 1
+echo "STOP NCT-Manager module ------------------------------> OK"
+
+echo "STOP Placement module"
+kill -9 `ps aux | grep placement.py | grep -v grep | awk '{print $2}'`
+sleep 1
+echo "STOP Placement module --------------------------------> OK"
+
+echo "STOP SFC-Manager module"
+kill -9 `ps aux | grep sfc-manager.py | grep -v grep | awk '{print $2}'`
+sleep 1
+echo "STOP SFC-Manager module ------------------------------> OK"
+
+echo "STOP Orchestrator  module"
+kill -9 `ps aux | grep sfc-orchestrator.py | grep -v grep | awk '{print $2}'`
+sleep 1
+echo "STOP Orchestrator module -----------------------------> OK"
