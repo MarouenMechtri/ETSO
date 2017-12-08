@@ -12,12 +12,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-"""
-Created on Dec 3, 2017
-@authors: Marouane Mechteri
-@contacts: {mechteri.marouane}@gmail.com
-@license: Apache License, Version 2.0
-"""
+# Created on Dec 3, 2017
+# authors: Marouane Mechteri
+# contacts: {mechteri.marouane}@gmail.com
+# license: Apache License, Version 2.0
 
 #!/bin/sh
 
