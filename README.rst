@@ -56,10 +56,72 @@ Installation of OpenDaylight and SFC features
     feature:install  odl-sfc-model odl-sfc-provider odl-sfc-provider-rest odl-sfc-netconf odl-sfc-ovs  odl-sfc-scf-openflow odl-sfc-openflow-renderer  odl-sfclisp odl-sfc-sb-rest odl-sfc-ui
 
 
-Configuration of the ETSO framework
-===================================
+Installation and Configuration of the ETSO framework
+====================================================
 
+* To build the ETSO framework you need to install the following additional libraries and tools::
+
+   sudo apt-get update 
+   sudo apt-get -y upgrade
+   sudo apt-get -y install python-setuptools python-dateutil python-pip git openjdk-8-jre python-packaging
+
+
+* Installation of python clients of OpenStack services::
+
+    sudo apt-get -y install python-openstackclient python-ceilometerclient python-heatclient 
+
+* Clone this git repository in your ETSO VM::
+
+    git clone https://github.com/MarouenMechtri/ETSO.git -b ETSO_v2
+
+* Adding trusted root certificates to the ETSO VM::
+
+    
+    # Copy your CA to dir /usr/local/share/ca-certificates/:
+    sudo cp openstack_https.crt /usr/local/share/ca-certificates/openstack_https.crt
+
+    # Update the CA store: 
+    sudo update-ca-certificates
+
+* Install ETSO services::
+
+   cd ETSO 
+   sudo ./install.sh
+
+* Update ODL plugin with the OpenDaylight address, port, username and password::
+
+   vi SFC-manager/plugins/config.json
+
+   {
+   "ODL" : "192.168.111.36",
+   "ODL_PORT" : 8181,
+   "ODL_USERNAME" : "admin",
+   "ODL_PASSWORD" : "admin"
+   }
+
+
+* Update credentials.py file with credentials of the OpenStack selected to host the requested SFC, VMs, and stacks::
+
+   vi SFC-orchestrator/credentials.py
+
+   USERNAME="username"
+   PASSWORD="password"
+   TENANT_NAME="tenant_name"
+   TENANT_ID="tenant_uuid"
+   ENDPOINT="https://OPENSTACK_ADDRESS:5000/v2.0"
+   SERVICE="compute"
+   REGION="RegionOne"
+   VERSION=2
+   HEAT_URL="https://OPENSTACK_ADDRESS:8004/v1/tenant_id"
+   OS_CACERT="/etc/ssl/certs/openstack_https.pem" 
 
 
 Create an SFC
 =============
+
+Before creating your first SFC, you need to start the ETSO services:
+
+* Starting the ETSO services::
+    ./start.py
+   
+
