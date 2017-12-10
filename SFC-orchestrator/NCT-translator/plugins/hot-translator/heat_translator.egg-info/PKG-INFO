@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: heat-translator
-Version: 0.0.1.dev13
+Version: 0.0.1.dev26
 Summary: Tool to translate non-heat templates to Heat Orchestration Template.
 Home-page: http://www.openstack.org/
 Author: OpenStack

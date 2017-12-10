@@ -1,6 +1,18 @@
 CHANGES
 =======
 
+* update start and stop scripts
+* Update README.rst
+* Delete README.md
+* Update README.rst
+* Update README.rst
+* update README file
+* adding placementAlgo.jar that encapsulates all the placement algorithms
+* adding new scripts that automate starting and stopping ETSO services
+* update decomposer.py to enable the deployment of templates have no SFC request
+* update tosca-parser and heat-translator
+* update ETSO to support connecting to openstack with https
+* update ETSO to support connecting to openstack with https
 * update template with NET-2 variable
 * avoid conflict between version as integer and version as package version
 * change tenant by tenant_name and tenant_id
