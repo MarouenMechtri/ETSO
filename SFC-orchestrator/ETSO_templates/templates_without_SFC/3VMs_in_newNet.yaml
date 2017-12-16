@@ -1,0 +1,122 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+description: example 3 VMs.
+
+imports:
+
+topology_template:
+  inputs:
+    network_cidr:
+      type: string
+      default: 10.101.0.0/24
+      description: CIDR for the network
+    network_start_ip:
+      type: string
+      default: 10.101.0.100
+      description: Start IP for the allocation pool
+    network_end_ip:
+      type: string
+      default: 10.101.0.150
+      description: End IP for the allocation pool
+
+  node_templates:
+    vnf_container1:
+      type: tosca.nodes.Compute
+      capabilities:
+        # Host container properties
+        host:
+         properties:
+           num_cpus: 2
+           disk_size: 10 GB
+           mem_size: 512 MB
+        # Guest Operating System properties
+        os:
+          properties:
+            # host Operating System image properties
+            architecture: x86_64
+            type: sfc_client
+            distribution: ubuntu
+            version: 14.04
+
+
+    vnf_container2:
+      type: tosca.nodes.Compute
+      capabilities:
+        # Host container properties
+        host:
+         properties:
+           num_cpus: 2
+           disk_size: 10 GB
+           mem_size: 512 MB
+        # Guest Operating System properties
+        os:
+          properties:
+            # host Operating System image properties
+            architecture: x86_64
+            type: sfc_client
+            distribution: ubuntu
+            version: 14.04
+
+    vnf_container3:
+      type: tosca.nodes.Compute
+      capabilities:
+        # Host container properties
+        host:
+         properties:
+           num_cpus: 2
+           disk_size: 10 GB
+           mem_size: 512 MB
+        # Guest Operating System properties
+        os:
+          properties:
+            # host Operating System image properties
+            architecture: x86_64
+            type: sfc_client
+            distribution: ubuntu
+            version: 14.04
+
+    my_network:
+      type: tosca.nodes.network.Network
+      properties:
+        ip_version: 4
+        cidr: { get_input: network_cidr }
+        start_ip: { get_input: network_start_ip }
+        end_ip: { get_input: network_end_ip }
+
+    my_port1:
+      type: tosca.nodes.network.Port
+      requirements:
+        - binding:
+            node: vnf_container1
+        - link:
+            node: my_network
+
+    my_port2:
+      type: tosca.nodes.network.Port
+      requirements:
+        - binding:
+            node: vnf_container2
+        - link:
+            node: my_network
+
+    my_port3:
+      type: tosca.nodes.network.Port
+      requirements:
+        - binding:
+            node: vnf_container3
+        - link:
+            node: my_network
+
+
+  outputs:
+    vnf1_ip:
+      description: The private IP address of the VNF container1.
+      value: { get_attribute: [vnf_container1, private_address] }
+    vnf2_ip:
+      description: The private IP address of the VNF container2.
+      value: { get_attribute: [vnf_container2, private_address] }
+    vnf3_ip:
+      description: The private IP address of the VNF container3.
+      value: { get_attribute: [vnf_container3, private_address] }
+
+
