@@ -125,3 +125,6 @@ Before creating your first SFC, you need to start the ETSO services:
     ./start.py
    
 
+
+
+curl -X POST --data-binary @SFC-orchestrator/ETSO_templates/templates_with_SFC/nsd_with_3vfns_on_existingNet.yaml -H "Content-type: text/x-yaml"  http://ETSO_IP_ADDRESS:8181/deploy_template
