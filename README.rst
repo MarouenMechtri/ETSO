@@ -125,7 +125,8 @@ Before creating your first SFC, you need to start the ETSO services.
 
    ./start.py
 
-To test the ETSO framework, we provided some examples of template `in this folder <https://github.com/MarouenMechtri/ETSO/tree/ETSO_v2/SFC-orchestrator/ETSO_templates>`_. The ETSO framework handles two types of templates: 
+To test the ETSO framework, we provided some examples of template `in this folder <https://github.com/MarouenMechtri/ETSO/tree/ETSO_v2/SFC-orchestrator/ETSO_templates>`_. The ETSO framework handles two types of templates:
+ 
 - Network Service Descriptor (NSD) templates in TOSCA/yaml format which containt the NCT (Network Connectivity Template) part and the SFC (Service Function Chain) part. Here is some `exmaples <https://github.com/MarouenMechtri/ETSO/tree/ETSO_v2/SFC-orchestrator/ETSO_templates/templates_with_SFC>`_.
 - Templates in TOSCA/yaml which contain a set of cloud resources (VMs, network, subnet, port...). These templates do not contain an SFC part. Here is some `exmaples <https://github.com/MarouenMechtri/ETSO/tree/ETSO_v2/SFC-orchestrator/ETSO_templates/templates_without_SFC>`_.
    
@@ -138,9 +139,9 @@ The ETSO framework can be invoked with several methods.
 
 You can use GUI plateform like `postman tool <https://www.getpostman.com/>`_. In this case you should specify:
 
-* The type of request::
+* The type of request (POST, GET, DELETE...) ::
 
-   POST, GET, DELETE...
+   POST
 
 * The ETSO URL::
 
