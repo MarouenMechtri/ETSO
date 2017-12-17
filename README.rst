@@ -83,6 +83,28 @@ Installation and Configuration of the ETSO framework
     # Update the CA store: 
     sudo update-ca-certificates
 
+To customize the ETSO framework to your cloud environement, you should specify:
+
+- key pair that you are using in the OpenStack::
+
+    vi ETSO/SFC-orchestrator/Tosca-parser/toscaparser/sfc/tosca/tosca_compute.py 
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/key_name.png
+
+- flavors that you are using by adding new element as depicted in the figure::
+
+    vi ETSO/SFC-orchestrator/Tosca-parser/toscaparser/sfc/tosca/tosca_compute.py
+
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/Flavors.png
+
+
+- images available in your cloud by adding new element as depicted in the figure::
+
+    vi ETSO/SFC-orchestrator/Tosca-parser/toscaparser/sfc/tosca/tosca_compute.py
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/images.png
+ 
 * Install ETSO services::
 
    cd ETSO 
