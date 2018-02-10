@@ -22,7 +22,6 @@ Copyright (C) `Marouane Mechteri <https://www.linkedin.com/in/mechtri>`_
 Configuration of the placement module and selection of the placement algorithm
 ==============================================================================
 
-sudo apt-get install libgfortran3
 
 The placement module embeds a family of optimization algorithms to intelligently place VMs or VNFs in underlying NFVIs and to steer traffic flows across the VNFs while using efficiently the infrastructure resources. A set of algorithms are already integrated in the placement package `"placementAlgo.jar" <placementAlgo.jar>`_, and can be selected, invoked, and activated.
 The available algorithms are: 
@@ -40,8 +39,40 @@ To select one of the algorithm available in the placement package, update the `o
 - greedy
 - mcts
 
+Install prerequisite package::
+
+   sudo apt-get install libgfortran3
+
 Figure below shows the part of the code that should be changed::
 
-    vi SFC-orchestrator/sfc-orchestrator.py
+   vi SFC-orchestrator/sfc-orchestrator.py
+
+
+Inputs and Output of the placement algorithms
+=============================================
+
+
+The inputs of each placement algorithm are:
+
+* The client request is modeled by a graph composed by a set of virtual nodes representing VNF and a set of virtual links connecting them. `instanceIG3-0 <instanceIG3-0>`_ is an example of a request composed by 3 VNFs and 2 links and representing a service chain::
+
+   Number of Servers
+   3 1 1
+   Nodes
+   0 0 2 3 1 0
+   1 1 2 3 1 0
+   2 2 2 3 1 0
+   EDGES
+   0 1 100
+   1 2 100
+
+* The substrate graph is modeled also by a graph. `instanceRG13-0 <instanceRG13-0>`_ is an example of a substrate infrastructure.
+
+The output of the algorithms is a file containing the mapping result of the client request on the substrate infrastructure. The file name of the algorithm output has this format: SolutionMappingALGO-SUBSTRATE_FILE_NAME-REQUEST_FILE_NAME. For example, when executing the dynamic programming algorithm the output file name is SolutionMappingDP-instanceRG13-0-instanceIG3-0.
+
+
+The Dummy algorithm
+===================
+
 
 
