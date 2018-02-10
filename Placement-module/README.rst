@@ -33,7 +33,7 @@ The available algorithms are:
 4. An algorithm based on the Monte Carlo Tree Search (MCTS): `An Efficient Algorithm for Virtual Network Function Placement and Chaining <https://www.researchgate.net/publication/318579373_An_efficient_algorithm_for_virtual_network_function_placement_and_chaining>`_
 
 
-To select one of the algorithm available in the placement package, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and precisely placement_headers['algorithm'] variable with one of this value:
+To select one of the algorithm available in the placement package, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and precisely placement_headers['algorithm'] variable with one of these values:
 
 - eigen
 - dp
