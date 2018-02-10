@@ -388,3 +388,12 @@ You can use GUI plateform like `postman tool <https://www.getpostman.com/>`_. In
 	    vnf3_ip:
 	      description: The private IP address of the VNF container3.
 	      value: { get_attribute: [VM3, private_address] }
+
+* From the Horizon web interface, you can verify that the requested resources are instantiated:
+
+   https://OPENSTACK_IP/horizon/project/stacks/
+
+* Then, from the OpenDaylight web interface you can check that the service function chains (SFCs) are instantiated:
+
+   http://ODL_IP:8181/index.html#/sfc/serviceforwarder
+
