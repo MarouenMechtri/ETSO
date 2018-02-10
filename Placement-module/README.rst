@@ -32,3 +32,15 @@ The available algorithms are:
 3. A Greedy algorithm: `VNF Placement and Chaining in Distributed Cloud <https://www.researchgate.net/publication/312570696_VNF_Placement_and_Chaining_in_Distributed_Cloud>`_
 4. An algorithm based on the Monte Carlo Tree Search (MCTS): `An Efficient Algorithm for Virtual Network Function Placement and Chaining <https://www.researchgate.net/publication/318579373_An_efficient_algorithm_for_virtual_network_function_placement_and_chaining>`_
 
+
+To select one of the algorithm available in the placement package, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ with one of this value:
+- eigen
+- dp
+- greedy
+- mcts
+
+Figure below shows the part of the code that should be changed::
+
+    vi SFC-orchestrator/sfc-orchestrator.py
+
+

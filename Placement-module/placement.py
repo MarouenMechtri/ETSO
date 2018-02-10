@@ -159,6 +159,10 @@ def placement():
     if algo == 'eigen':
         SolutionMapping_file_name = "SolutionMappingEigen-instanceRG" + str(len(sorted_servers)) + "-0-instanceIG" + str(
             nbVMs) + "-0"
+    if algo == 'dp':
+        SolutionMapping_file_name = "SolutionMappingDP-instanceRG" + str(len(sorted_servers)) + "-0-instanceIG" + str(
+            nbVMs) + "-0"
+
 
     SolutionMapping_file = open(SolutionMapping_file_name, "r")
     mapping_solution = {}
