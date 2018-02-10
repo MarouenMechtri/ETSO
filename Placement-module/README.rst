@@ -34,6 +34,7 @@ The available algorithms are:
 
 
 To select one of the algorithm available in the placement package, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ with one of this value:
+
 - eigen
 - dp
 - greedy
