@@ -50,7 +50,7 @@ Figure below shows the part of the code that should be changed::
 
    placement_headers = {}
    placement_headers['content-type'] = 'application/json'
-   placement_headers['algorithm'] = '**Algorithm_name**'
+   **placement_headers['algorithm'] = 'Algorithm_name'**
    placement_headers['version'] = str(credentials.VERSION)
    placement_headers['username'] = credentials.USERNAME
 
