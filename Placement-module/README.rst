@@ -86,7 +86,8 @@ The Dummy algorithm
 
 
 In this section, we show the procedure to add a new algorithm in the ETSO framework:
-* First step of the procedure is to download the `ETSO dummy algorithm <https://github.com/MarouenMechtri/ETSO_dummy_algorithm>`_ package::
+
+* The first step of the procedure is to download the `ETSO dummy algorithm <https://github.com/MarouenMechtri/ETSO_dummy_algorithm>`_ package::
 
    git clone https://github.com/MarouenMechtri/ETSO_dummy_algorithm.git
 
