@@ -39,6 +39,7 @@ To select one of the algorithm available in the placement package, update the `o
 - greedy
 - mcts
 
+
 Install prerequisite package::
 
    sudo apt-get install libgfortran3
@@ -47,6 +48,15 @@ Figure below shows the part of the code that should be changed::
 
    vi SFC-orchestrator/sfc-orchestrator.py
 
+   placement_headers = {}
+   placement_headers['content-type'] = 'application/json'
+   placement_headers['algorithm'] = '**Algorithm_name**'
+   placement_headers['version'] = str(credentials.VERSION)
+   placement_headers['username'] = credentials.USERNAME
+
+
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/orchestratorpy.png
 
 Inputs and Output of the placement algorithms
 =============================================
