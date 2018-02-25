@@ -96,10 +96,14 @@ In this section, we show the procedure to add a new algorithm in the ETSO framew
 
    vi ETSO_dummy_algorithm/src/dummy_algo/dummy_algo.java
 
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/dummy_algojava1.png
+
 The call to the new algorithm must be made after reading the input files (request and substrate files) then the result of the algorithm must be saved in the matrix **mappingResult**. In the dummy example, we made a simple resource assignment which consists of assigning the first VM to the first server, the second VM to the second server...
 
 
 * The third step of the procedure is to make sure that the output file of the algorithm respect the format described earlier (see figure below).
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/dummy_algojava.png
 
 
 * The fourth step consists on updating the `PlacementAlgo.java file <https://raw.githubusercontent.com/MarouenMechtri/ETSO_dummy_algorithm/master/src/placementSFC/PlacementAlgo.java>`_ which is the interface between the placement module of the ETSO framework and placement package that will encapsulate the new algorithm::
@@ -107,6 +111,9 @@ The call to the new algorithm must be made after reading the input files (reques
    vi ETSO_dummy_algorithm/src/placementSFC/PlacementAlgo.java
 
 * The fifth step is to generate and to export a runnable jar file. Figure below show how to generate the jar file via the eclipse
+
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/exportjarfile.png
+
 
 * The final step is to add a new entry in the placement.py file with the new algorithm.
 
