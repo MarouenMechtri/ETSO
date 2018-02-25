@@ -3,7 +3,7 @@ Placement module of the ETSO Framework
 ####
 
 
-This guide describes how to customize the placement module `"placement.py" <placement.py>`_ to use our placement algorithm available in the placement package `"placementAlgo.jar" <placementAlgo.jar>`_. 
+This guide describes how to customize the placement module `"placement.py" <placement.py>`_ to use a placement algorithm available in the placement package `"placementAlgo.jar" <placementAlgo.jar>`_. 
 Then we describe the inputs and output of the placement algorithms and show how we can add and package a new one. A dummy algorithm was developed to easily integrate a new algorithm in the ETSO framework.
 
 
@@ -107,11 +107,11 @@ The call to the new algorithm must be made after reading the input files (reques
 .. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/dummy_algojava.png
 
 
-* The fourth step consists on updating the `PlacementAlgo.java file <https://raw.githubusercontent.com/MarouenMechtri/ETSO_dummy_algorithm/master/src/placementSFC/PlacementAlgo.java>`_ which is the interface between the placement module of the ETSO framework and placement package that will encapsulate the new algorithm::
+* The fourth step consists on updating the `PlacementAlgo.java file <https://raw.githubusercontent.com/MarouenMechtri/ETSO_dummy_algorithm/master/src/placementSFC/PlacementAlgo.java>`_ which is the interface between the placement module of the ETSO framework and the placement package that will encapsulate the new algorithm::
 
    vi ETSO_dummy_algorithm/src/placementSFC/PlacementAlgo.java
 
-* The fifth step is to generate and to export a runnable jar file. Figure below show how to generate the jar file via the eclipse
+* The fifth step is to generate and to export a runnable jar file. Figure below show how to generate the jar file via eclipse
 
 .. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/exportjarfile.png
 
