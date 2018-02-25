@@ -58,6 +58,7 @@ Figure below shows the part of the code that should be changed::
 
 .. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/orchestratorpy.png
 
+
 Inputs and Output of the placement algorithms
 =============================================
 
@@ -115,7 +116,11 @@ The call to the new algorithm must be made after reading the input files (reques
 .. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/exportjarfile.png
 
 
-* The final step is to add a new entry in the placement.py file with the new algorithm.
+* The final step is to add a new entry in the placement.py file with the new algorithm. See figure below:
 
-To test the new algorithm with the ETSO framework, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and set the placement_headers['algorithm'] variable to the *dummy* value.
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/placementpy1.png
+
+To integrate the new algorithm in the ETSO framework, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and set the placement_headers['algorithm'] variable to the *dummy* value.
+ 
+.. image:: https://raw.githubusercontent.com/MarouenMechtri/ETSO/ETSO_v2/images/orchestratorpy1.png
 
