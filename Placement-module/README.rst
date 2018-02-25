@@ -110,5 +110,5 @@ The call to the new algorithm must be made after reading the input files (reques
 
 * The final step is to add a new entry in the placement.py file with the new algorithm.
 
-To test the new algorithm with the ETSO framework, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and set the placement_headers['algorithm'] variable to the dummy value.
+To test the new algorithm with the ETSO framework, update the `orchestrator.py file <../SFC-orchestrator/sfc-orchestrator.py>`_ and set the placement_headers['algorithm'] variable to the *dummy* value.
 
